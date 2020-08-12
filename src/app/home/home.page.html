@@ -1,20 +1,55 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+<ion-toolbar color="success">
+  <ion-buttons slot="secondary">
+    <ion-button fill="solid" (click)="navigateToRegistration()">
+      <ion-icon slot="end" name="person-add"></ion-icon>
+      Registration
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="secondary">
+    <ion-button share="round" fill="solid" (click)="navigateToLogin()">
+      <ion-icon slot="end" name="log-in"></ion-icon>
+      Login
+    </ion-button>
+  </ion-buttons>
+  <ion-title ngStyle>Home</ion-title>
+  <ion-buttons slot="primary">
+    <ion-button fill="solid" color="secondary">
+      Help
+      <ion-icon slot="end" name="help-circle"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header style="margin-top: 50px; text-align: center;">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Zreyas Tecnology</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-card>
+      <ion-item href="#" class="ion-activated">
+        <ion-icon name="wifi" slot="start"></ion-icon>
+        <ion-label>Wifi</ion-label>
+      </ion-item>
+    
+      <ion-item href="#">
+        <ion-icon name="fast-food-outline"slot="start"></ion-icon>
+        <ion-label>launch time</ion-label>
+      </ion-item>
+    
+      <ion-item class="ion-activated">
+        <ion-icon name="warning" slot="start"></ion-icon>
+        <ion-label>Instructions</ion-label>
+      </ion-item>
+    
+      <ion-item>
+        <ion-icon name="walk" slot="start"></ion-icon>
+        <ion-label>Break time</ion-label>
+      </ion-item>
+    </ion-card>
   </div>
 </ion-content>

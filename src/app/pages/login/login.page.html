@@ -1,0 +1,40 @@
+
+
+<ion-header>
+  <ion-toolbar color="success" >
+  <ion-title>Login</ion-title>
+  </ion-toolbar>
+  </ion-header>
+  
+  <ion-card-content >
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" >
+  <!-- <img src="assets/images/logo.png" class="smallLogo"/> -->
+  <h1>Sign In</h1>
+  <form>
+  <ion-list>
+  <ion-item>
+  <ion-label position="floating">Username</ion-label>
+  <ion-input autocomplete="off" type="text"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+  <ion-label position="floating">Password</ion-label>
+  <ion-input autocomplete="off" type="password"></ion-input>
+  </ion-item>
+  
+  <ion-item lines='none'>
+  <a routerLink='/registration'>Create Account</a>
+  </ion-item>
+  <ion-item lines='none'>
+    Update your Password   <a routerLink='/'>&nbsp;New Password</a>  
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" share="round" color="success">Login</ion-button>
+  </form>
+</ion-col>
+</ion-row>
+</ion-grid>
+  </ion-card-content>
+  
