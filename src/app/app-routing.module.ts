@@ -19,6 +19,14 @@ const routes: Routes = [
     path: 'registration',
     loadChildren: () => import('./pages/registration/registration.module').then( m => m.RegistrationPageModule)
   },
+  {
+    path: 'update-password',
+    loadChildren: () => import('./pages/update-password/update-password.module').then( m => m.UpdatePasswordPageModule)
+  },
+  {
+    path: 'main-page',
+    loadChildren: () => import('./pages/main-page/main-page.module').then( m => m.MainPagePageModule)
+  },
 ];
 
 @NgModule({

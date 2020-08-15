@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color="success">
+  <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+  </ion-buttons>
   <ion-title>Registration</ion-title>
   </ion-toolbar>
   </ion-header>
@@ -12,28 +15,27 @@
   <form >
   
   <ion-item>
-  <ion-label position="stacked">Name</ion-label>
+  <ion-label position="stacked"><ion-icon name="person-outline"></ion-icon>
+   &nbsp; Name</ion-label>
   <ion-input autocomplete="off" type="text"></ion-input>
   </ion-item>
 
   <ion-list>
     <ion-item>
-    <ion-label position="stacked">Email</ion-label>
+    <ion-label position="stacked"><ion-icon name="mail-outline"></ion-icon>
+    &nbsp; Personal Email</ion-label>
     <ion-input autocomplete="off" type="email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">DOB</ion-label>
+      <ion-label position="stacked"><ion-icon name="calendar-outline"></ion-icon>
+        &nbsp;  Date of Birth</ion-label>
       <ion-datetime displayFormat="DD/MM/YYYY" min="1990-01-01" max="2020-01-01"></ion-datetime>
     </ion-item>
-  
-  <ion-item>
-  <ion-label position="stacked">Mobile No.</ion-label>
-  <ion-input autocomplete="off" type="number"></ion-input>
-  </ion-item>
 
   <ion-item>
-   <ion-label position="stacked">Profile Picture</ion-label><br>
+   <ion-label position="stacked"><ion-icon name="happy-outline"></ion-icon>
+    &nbsp;  Profile Picture</ion-label><br>
 
    <img [src]="" style="width: 250;height: 200;">
    <input type="file" #Image accept="image/*">
@@ -41,28 +43,35 @@
 
    <ion-item-group>
     <ion-item-divider >
-      <ion-label>ADDRESS</ion-label>
+      <ion-label><ion-icon name="location-outline"></ion-icon>
+        ADDRESS</ion-label>
     </ion-item-divider>
   
     <ion-item>
-      <ion-label position="stacked">City</ion-label>
+      <ion-label position="stacked">&nbsp;City</ion-label>
       <ion-input autocomplete="off" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">State</ion-label>
+      <ion-label position="stacked">&nbsp;State</ion-label>
       <ion-input autocomplete="off" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="stacked">Postal Code</ion-label>
+      <ion-label position="stacked">&nbsp;Postal Code</ion-label>
       <ion-input autocomplete="off" type="number"></ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked"><ion-icon name="call-outline"></ion-icon>
+        &nbsp;  Mobile No.</ion-label>
+      <ion-input autocomplete="off" type="number"></ion-input>
+      </ion-item>
   </ion-item-group>
   
   <ion-item lines='none'>
   Already have an account? <a routerLink='/login'>Sign in.</a>
   </ion-item>
   </ion-list>
-  <ion-button expand="block" share="round" color="success">Registration</ion-button>
+  <ion-button expand="block" share="round" color="success" (click)="btnClicked()">Registration</ion-button>
   </form>
 </ion-col>
 </ion-row>

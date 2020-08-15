@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationPage implements OnInit {
 
-  constructor() { }
+  btnClicked(){
+    // alert('btn clicked')
+    this.router.navigate(['main-page']);
+  }
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }

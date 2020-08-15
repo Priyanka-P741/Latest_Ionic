@@ -2,6 +2,9 @@
 
 <ion-header>
   <ion-toolbar color="success" >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   <ion-title>Login</ion-title>
   </ion-toolbar>
   </ion-header>
@@ -15,23 +18,27 @@
   <form>
   <ion-list>
   <ion-item>
-  <ion-label position="floating">Username</ion-label>
-  <ion-input autocomplete="off" type="text"></ion-input>
+  <ion-label position="stacked">  <ion-icon name="mail-outline"></ion-icon> &nbsp;
+    Email</ion-label>
+  <ion-input autocomplete="off" type="text" required></ion-input>
   </ion-item>
   
   <ion-item>
-  <ion-label position="floating">Password</ion-label>
-  <ion-input autocomplete="off" type="password"></ion-input>
+  <ion-label position="stacked">  <ion-icon name="key-outline"></ion-icon> &nbsp;
+    Password</ion-label>
+  <ion-input autocomplete="off" type="password" required></ion-input>
   </ion-item>
   
   <ion-item lines='none'>
-  <a routerLink='/registration'>Create Account</a>
+  <a routerLink='/registration' text="small-text">Create Account.</a>
   </ion-item>
-  <ion-item lines='none'>
-    Update your Password   <a routerLink='/'>&nbsp;New Password</a>  
-    </ion-item>
+  
   </ion-list>
-  <ion-button expand="block" share="round" color="success">Login</ion-button>
+  <ion-button expand="block" share="round" color="success"  (click)="btnClicked()">Login</ion-button>
+
+  <ion-item lines='none'>Forgot Password ? &nbsp;
+    <a routerLink='/update-password' text="small-text">Update your Password</a>  
+ </ion-item>
   </form>
 </ion-col>
 </ion-row>
