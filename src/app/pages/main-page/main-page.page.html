@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="secondary">
+      <ion-button share="round" fill="clear">
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button share="round" fill="clear">
+        <ion-icon slot="end" name="menu-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>MainPage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>
+        <ion-item>{{ today | date: 'dd/MM/yyyy &nbsp;&nbsp;&nbsp;&nbsp; HH:mm' }}</ion-item>
+
+      </ion-card-subtitle>
+      <ion-card-title>Check-In</ion-card-title>
+    </ion-card-header>
+  
+    <ion-button expand="block" fill="outline" color="warning" >Start</ion-button>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Check-Out</ion-card-title>
+    </ion-card-header>
+  
+    <ion-button color="warning" fill="outline" expand="block" >Close</ion-button>
+  </ion-card>
+  
+</ion-content>
