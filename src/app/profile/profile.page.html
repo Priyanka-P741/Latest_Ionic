@@ -1,0 +1,90 @@
+<ion-header translucent no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title slot="start">
+    <ion-icon name="happy-outline"></ion-icon>
+      My Profile&nbsp;</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="create-outline" color="dark"></ion-icon>
+        Edit
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" slot="fixed"  [scrollEvents]="true">
+
+  <ion-avatar class="avatar">
+    <img src="../../assets/img/EmpProfilePic.png" alt="">
+    <ion-chip>
+      <ion-label color="danger">ID</ion-label>
+    </ion-chip>
+  </ion-avatar>
+
+<div class="ion-padding">
+
+  <ion-item>
+    <ion-label>
+      Name
+    </ion-label>
+  </ion-item>
+  <ion-item>
+      <ion-label>
+        Designation
+      </ion-label>
+  </ion-item>
+    <ion-item>
+      <ion-label>
+        Reporting Manager
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Joining Date
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Hardware Allotted
+      </ion-label>
+    </ion-item>
+    <ion-item>
+    <ion-label>
+      Personal Email
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Date of Birth
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Address
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      City
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      State
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Postal Code
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Mobile number
+    </ion-label>
+  </ion-item>
+  </div>
+</ion-content>

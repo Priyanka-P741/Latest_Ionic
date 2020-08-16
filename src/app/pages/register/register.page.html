@@ -1,0 +1,146 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="myForm">
+    <ion-item lines="full">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label position="inline">Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.name">
+       <div *ngIf="myForm.get('name').hasError(validation.type) && myForm.get('name').touched">
+        <p>**{{validation.message}}</p>
+      </div>
+      </ng-container>
+    </div>
+    <br>
+
+    <ion-item lines="full">
+      <ion-icon name="mail-outline"></ion-icon>
+      <ion-label position="inline">Personal Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div *ngIf="myForm.get('email').hasError(validation.type) && myForm.get('email').touched">
+          <p>**{{validation.message}}</p>
+        </div>
+      </ng-container>
+    </div>
+    <br>
+
+    <ion-item lines="full">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <ion-label position="inline">Date of Birth</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="dob" min="1990-01-01" max="2020-01-01"></ion-datetime>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.dob">
+        <div *ngIf="myForm.get('dob').hasError(validation.type) && myForm.get('dob').touched">
+          <p>**{{validation.message}}</p>
+        </div>
+      </ng-container>
+    </div>
+    <br>
+
+    <ion-item lines="full">
+      <ion-icon name="image-outline"></ion-icon>
+      <ion-label position="floationg">Profile Picture</ion-label>
+      <img [src]="" style="width: 250;height: 200;">
+      <input type="file" formControlName="pic" #Image accept="image/*">
+    </ion-item><div>
+      <ng-container *ngFor="let validation of validation_messages.pic">
+        <div *ngIf="myForm.get('pic').hasError(validation.type) && myForm.get('pic').touched">
+          <p>**{{validation.message}}</p>
+        </div>
+      </ng-container>
+    </div>
+    <br>
+
+    <ion-item lines="full">
+      <ion-icon name="business-outline"></ion-icon>
+      <ion-label position="inline">Address</ion-label>
+      <ion-input type="text" formControlName="addr"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.addr">
+        <div *ngIf="myForm.get('addr').hasError(validation.type) && myForm.get('addr').touched">
+          <p>**{{validation.message}}</p>
+        </div>
+      </ng-container>
+    </div>
+    <br>
+
+    <ion-item lines="full">
+      <ion-icon name="trail-sign-outline"></ion-icon>
+      <ion-label position="inline">City</ion-label>
+      <ion-input type="text" formControlName="city"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.city">
+        <div *ngIf="myForm.get('city').hasError(validation.type) && myForm.get('city').touched">
+          <p>**{{validation.message}}</p>
+        </div>
+      </ng-container>
+    </div>
+    <br>
+
+    <ion-item lines="full">
+      <ion-icon name="location-outline"></ion-icon>
+      <ion-label position="inline">State</ion-label>
+      <ion-input type="text" formControlName="state"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.state">
+        <div *ngIf="myForm.get('state').hasError(validation.type) && myForm.get('state').touched">
+          <p>**{{validation.message}}</p>
+        </div>
+      </ng-container>
+    </div>
+    <br>
+
+    <ion-item lines="full">
+      <ion-icon name="earth-outline"></ion-icon>
+      <ion-label position="inline">Postal Code</ion-label>
+      <ion-input type="text" formControlName="pincode"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.pincode">
+        <div *ngIf="myForm.get('pincode').hasError(validation.type) && myForm.get('pincode').touched">
+          <p>**{{validation.message}}</p>
+        </div>
+      </ng-container>
+    </div>
+    <br>
+
+    <ion-item lines="full">
+      <ion-icon name="call-outline"></ion-icon>
+      <ion-label position="inline">Mobile Number</ion-label>
+      <ion-input type="number" formControlName="mobile"></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.mobile">
+        <div *ngIf="myForm.get('mobile').hasError(validation.type) && myForm.get('mobile').touched">
+          <p>**{{validation.message}}</p>
+        </div>
+      </ng-container>
+    </div>
+    <br>
+
+
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="warning" expand="block">Sign Up</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
