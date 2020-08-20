@@ -1,0 +1,36 @@
+
+<ion-header translucent no-border>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title slot="start">
+    <ion-icon name="happy-outline"></ion-icon>
+      My Profile&nbsp;</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/edit']">
+        <ion-icon name="create-outline"></ion-icon>
+        Edit
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding  [scrollEvents]="true">
+<ion-card>
+<img src="../../../assets/images/profile_edit.png" width="100%" height="150px">
+  <ion-avatar class="avatar" >
+    <img src="../../../assets/images/EmpProfilePic.png" alt="">
+    
+  </ion-avatar>
+<ion-card-content >
+<ion-card-title >
+  Priyanka Pandit
+</ion-card-title>
+<p text-center>00priya741@gmail.com</p>
+</ion-card-content>
+
+
+
+
+

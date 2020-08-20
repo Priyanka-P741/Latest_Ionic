@@ -1,0 +1,32 @@
+ion-card-content{
+    margin-left: 10%;
+    margin-right: 10%;
+    // padding-bottom: 700px;
+    //  padding-right: 350px;
+}
+
+ion-content {
+    // --background: url(src\assets\img\profile_edit.png) no-repeat top center/cover fixed, #fff;
+    position: relative;
+    height: auto;
+    width: 100%;
+
+}
+
+ion-toolbar {
+    --background: transparent;
+}
+ion-button{
+    color: white;
+}
+
+ion-item{
+    --background: transparent;
+    color: darkblue;
+}
+
+.custom-icon {
+    font-size: 30px;
+    color : rgb(0, 255, 55);
+  }
+  

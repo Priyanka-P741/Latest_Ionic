@@ -7,31 +7,58 @@
   </ion-toolbar>
   </ion-header>
   
-  <ion-card-content padding='true'>
+  <ion-content fullscreen="true" slot="fixed" [scrollEvents]="true">
+  <ion-card-content padding='true' >
   <ion-row color="primary" justify-content-center>
     <ion-col size="12">
       <h1>Create Account</h1>
   
-  <form >
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
   
-  <ion-item>
+    <!--required pattern="^\d{10}$"-->
+
+  <ion-item >
   <ion-label position="stacked"><ion-icon name="person-outline"></ion-icon>
    &nbsp; Name</ion-label>
-  <ion-input autocomplete="off" type="text"></ion-input>
+  <ion-input autocomplete="off" type="text" formControlName="name"></ion-input>
   </ion-item>
+  <div>
+    <ng-container *ngFor="let validation of validation_messages.name">
+     <div *ngIf="myForm.get('name').hasError(validation.type) && myForm.get('name').touched">
+      <small class="text-danger">**{{validation.message}}</small>
+    </div>
+    </ng-container>
+  </div><br>
 
   <ion-list>
     <ion-item>
     <ion-label position="stacked"><ion-icon name="mail-outline"></ion-icon>
     &nbsp; Personal Email</ion-label>
-    <ion-input autocomplete="off" type="email"></ion-input>
+    <ion-input autocomplete="off" type="email" formControlName="email"></ion-input>
     </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div *ngIf="myForm.get('email').hasError(validation.type) && myForm.get('email').touched">
+          <small class="text-danger">**{{validation.message}}</small>
+        </div>
+      </ng-container>
+    </div>
+    <br>
+
 
     <ion-item>
       <ion-label position="stacked"><ion-icon name="calendar-outline"></ion-icon>
         &nbsp;  Date of Birth</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" min="1990-01-01" max="2020-01-01"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="dob" min="1990-01-01" max="2020-01-01"></ion-datetime>
     </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.dob">
+        <div *ngIf="myForm.get('dob').hasError(validation.type) && myForm.get('dob').touched">
+          <small class="text-danger">**{{validation.message}}</small>
+        </div>
+      </ng-container>
+    </div>
+    <br>
 
   <ion-item>
    <ion-label position="stacked"><ion-icon name="happy-outline"></ion-icon>
@@ -49,30 +76,64 @@
   
     <ion-item>
       <ion-label position="stacked">&nbsp;City</ion-label>
-      <ion-input autocomplete="off" type="text"></ion-input>
+      <ion-input autocomplete="off" type="text" formControlName="city"></ion-input>
     </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.city">
+        <div *ngIf="myForm.get('city').hasError(validation.type) && myForm.get('city').touched">
+          <small class="text-danger">**{{validation.message}}</small>
+        </div>
+      </ng-container>
+    </div>
+    <br>
     <ion-item>
       <ion-label position="stacked">&nbsp;State</ion-label>
-      <ion-input autocomplete="off" type="text"></ion-input>
+      <ion-input autocomplete="off" type="text" formControlName="state" ></ion-input>
     </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.state">
+        <div *ngIf="myForm.get('state').hasError(validation.type) && myForm.get('state').touched">
+          <small class="text-danger">**{{validation.message}}</small>
+        </div>
+      </ng-container>
+    </div>
+    <br>
     <ion-item>
       <ion-label position="stacked">&nbsp;Postal Code</ion-label>
-      <ion-input autocomplete="off" type="number"></ion-input>
+      <ion-input autocomplete="off" type="number" formControlName="pincode"></ion-input>
     </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.pincode">
+        <div *ngIf="myForm.get('pincode').hasError(validation.type) && myForm.get('pincode').touched">
+          <small class="text-danger">**{{validation.message}}</small>
+        </div>
+      </ng-container>
+    </div>
+    <br>
 
     <ion-item>
-      <ion-label position="stacked"><ion-icon name="call-outline"></ion-icon>
+      <ion-label position="stacked"><ion-icon name="call-outline" required pattern="^\d{10}$"></ion-icon>
         &nbsp;  Mobile No.</ion-label>
-      <ion-input autocomplete="off" type="number"></ion-input>
+      <ion-input autocomplete="off" type="number"  formControlName="mobile" ></ion-input>
       </ion-item>
+      <div>
+        <ng-container *ngFor="let validation of validation_messages.mobile">
+          <div *ngIf="myForm.get('mobile').hasError(validation.type) && myForm.get('mobile').touched">
+            <small class="text-danger">**{{validation.message}}</small>
+          </div>
+        </ng-container>
+      </div>
+      <br>
   </ion-item-group>
   
   <ion-item lines='none'>
   Already have an account? <a routerLink='/login'>Sign in.</a>
   </ion-item>
   </ion-list>
-  <ion-button expand="block" share="round" color="success" (click)="btnClicked()">Registration</ion-button>
+  <ion-button [disabled]="myForm.valid"  expand="block" share="round" color="success" (click)="btnClicked()" type="submit">Registration</ion-button>
   </form>
+  <!-- {{myForm.value | json}} -->
 </ion-col>
 </ion-row>
   </ion-card-content>
+</ion-content>

@@ -27,6 +27,14 @@ const routes: Routes = [
     path: 'main-page',
     loadChildren: () => import('./pages/main-page/main-page.module').then( m => m.MainPagePageModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'edit',
+    loadChildren: () => import('./pages/edit/edit.module').then( m => m.EditPageModule)
+  },
 ];
 
 @NgModule({

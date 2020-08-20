@@ -14,27 +14,42 @@
       <ion-row>
         <ion-col size="12" >
   <!-- <img src="assets/images/logo.png" class="smallLogo"/> -->
-  <h1>Sign In</h1>
-  <form>
-  <ion-list>
-  <ion-item>
-  <ion-label position="stacked">  <ion-icon name="mail-outline"></ion-icon> &nbsp;
-    Email</ion-label>
-  <ion-input autocomplete="off" type="text" required></ion-input>
-  </ion-item>
   
-  <ion-item>
-  <ion-label position="stacked">  <ion-icon name="key-outline"></ion-icon> &nbsp;
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+      <ion-label position="stacked"><ion-icon name="mail-outline"></ion-icon>
+      &nbsp; Email or Emp_Id</ion-label>
+      <ion-input class="form-control" autocomplete="off" type="email" formControlName="email"></ion-input>
+  </div>
+      <div>
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div *ngIf="myForm.get('email').hasError(validation.type) && myForm.get('email').touched">
+            <small class="text-danger">**{{validation.message}}</small>
+          </div>
+        </ng-container>
+      </div>
+      
+  
+  
+  <div class="form-group">
+   <ion-label position="stacked">  <ion-icon name="key-outline"></ion-icon> &nbsp;
     Password</ion-label>
-  <ion-input autocomplete="off" type="password" required></ion-input>
-  </ion-item>
+  <ion-input class="form-control" autocomplete="off" type="password" formControlName="password"></ion-input>
+  </div>
+  <div>
+    <ng-container *ngFor="let validation of validation_messages.password">
+      <div *ngIf="myForm.get('password').hasError(validation.type) && myForm.get('password').touched">
+        <small class="text-danger">**{{validation.message}}</small>
+      </div>
+    </ng-container>
+  </div>
+  
   
   <ion-item lines='none'>
   <a routerLink='/registration' text="small-text">Create Account.</a>
   </ion-item>
   
-  </ion-list>
-  <ion-button expand="block" share="round" color="success"  (click)="btnClicked()">Login</ion-button>
+  <ion-button [disabled] ="!myForm.valid" expand="block" share="round" color="success"  (click)="btnClicked()" type="submit">Login</ion-button>
 
   <ion-item lines='none'>Forgot Password ? &nbsp;
     <a routerLink='/update-password' text="small-text">Update your Password</a>  
