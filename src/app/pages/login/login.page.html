@@ -8,11 +8,10 @@
 </ion-header>
 
 <ion-content>
-  <p>{{d}}</p>
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
       <ion-item lines="full">
       <ion-icon class="custom-icon" name="mail-sharp"></ion-icon>
-      <ion-label position="inline">Email</ion-label>
+      <ion-label position="inline">Employee ID</ion-label>
       <ion-input autocomplete="off" type="text" required></ion-input>
       <div>
         <ng-container *ngFor="let validation of validation_messages.email">
@@ -38,7 +37,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-button [routerLink]="['/user-home']" (click)="afunction()" type="submit" color="warning" expand="block">Sign In</ion-button>
+        <ion-button [routerLink]="['/user-home']" type="submit" color="warning" expand="block">Sign In</ion-button>
         <a [routerLink]="['/forgotpassword']" class="small-text">Forgot Password?</a>
         <br>
         <a [routerLink]="['/register']" class="small-text">Create Account?</a>

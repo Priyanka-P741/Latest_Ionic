@@ -83,41 +83,13 @@
     <br>
 
     <ion-item lines="full">
-      <ion-icon name="trail-sign-outline"></ion-icon>
-      <ion-label position="inline">City</ion-label>
-      <ion-input autocomplete="off" type="text" formControlName="city"></ion-input>
+      <ion-icon name="person-sharp"></ion-icon>
+      <ion-label position="inline">Reporting Manager</ion-label>
+      <ion-input autocomplete="off" type="text" formControlName="reportingManager"></ion-input>
     </ion-item>
     <div>
       <ng-container *ngFor="let validation of validation_messages.city">
         <div *ngIf="myForm.get('city').hasError(validation.type) && myForm.get('city').touched">
-          <p>**{{validation.message}}</p>
-        </div>
-      </ng-container>
-    </div>
-    <br>
-
-    <ion-item lines="full">
-      <ion-icon name="location-outline"></ion-icon>
-      <ion-label position="inline">State</ion-label>
-      <ion-input autocomplete="off" type="text" formControlName="state"></ion-input>
-    </ion-item>
-    <div>
-      <ng-container *ngFor="let validation of validation_messages.state">
-        <div *ngIf="myForm.get('state').hasError(validation.type) && myForm.get('state').touched">
-          <p>**{{validation.message}}</p>
-        </div>
-      </ng-container>
-    </div>
-    <br>
-
-    <ion-item lines="full">
-      <ion-icon name="earth-outline"></ion-icon>
-      <ion-label position="inline">Postal Code</ion-label>
-      <ion-input autocomplete="off" type="text" formControlName="pincode"></ion-input>
-    </ion-item>
-    <div>
-      <ng-container *ngFor="let validation of validation_messages.pincode">
-        <div *ngIf="myForm.get('pincode').hasError(validation.type) && myForm.get('pincode').touched">
           <p>**{{validation.message}}</p>
         </div>
       </ng-container>

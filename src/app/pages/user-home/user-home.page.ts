@@ -19,6 +19,8 @@ export class UserHomePage implements OnInit {
 
   x: Number = 30;  // 30 Seconds
 
+  flag=0;
+
   latitude:number;
   longitude:number;
   coords:any;
@@ -34,23 +36,12 @@ export class UserHomePage implements OnInit {
   t = "" + this.h + this.m;
   time= Number(this.t);
 
-  flag=0;  
-
   UniqueDeviceID:string;
 
   constructor(private router: Router, private ngZone:NgZone, private device: Device, private uniqueDeviceID: UniqueDeviceID) {
     this.getUniqueDeviceID();
    }
-
-
-
-  afunction(){
-    (this.time < 1800 && this.time > 1000) || (this.time < 180 && this.time > 100) ? this.flag=1 : console.log ('time ok');
-    if(this.flag==1){
-      this.router.navigate(['/defaulter-checkout']);
-    }
-  }
-
+   
   async locate() {
     const coordinates = await Geolocation.getCurrentPosition();
     this.showingCurrent = true;
@@ -80,6 +71,25 @@ export class UserHomePage implements OnInit {
         console.log(error);
         this.UniqueDeviceID = "Error! ${error}";
       });
+  }
+
+  afunction() {
+    (this.time > 1000 && this.time < 1800) || (this.time > 100 && this.time < 180)  ? this.flag=1 : console.log ('time ok');
+    console.log(this.time);
+    if(this.flag==1){
+      this.router.navigate(['/defaulter-reason']);
+    }
+  }
+  
+  bfunction(){
+    (this.time < 1800 && this.time > 1000) || (this.time < 180 && this.time > 100) ? this.flag=1 : console.log ('time ok');
+    console.log(this.time);
+    if(this.flag==1){
+      this.router.navigate(['/defaulter-checkout']);
+    }
+    else{
+      alert("You are Checked-Out");
+      console.log(this.time);} 
   }
 
 // pushNotif(){
@@ -146,8 +156,6 @@ export class UserHomePage implements OnInit {
 
     this.locatemap();
 
-    this.today = Date.now();
-
     console.log('Device UUID is: ' + this.device.uuid);
 
     this.getUniqueDeviceID();  
@@ -157,5 +165,8 @@ export class UserHomePage implements OnInit {
   setInterval(()=>{
     this.locate();
   }, 30000)
+
+  setInterval(()=>{
+    this.today = Date.now() }, 1000)
   }
 }

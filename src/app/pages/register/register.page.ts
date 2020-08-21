@@ -28,16 +28,8 @@ export class RegisterPage implements OnInit {
      'addr' : [
       { type : 'required' , message: 'Address is required.' },
      ],
-     'city' : [
+     'reportingManager' : [
       { type : 'required' , message: 'City is required.' },
-     ],
-     'state' : [
-      { type : 'required' , message: 'State is required.' },
-     ],
-     'pincode' : [
-      { type : 'required' , message: 'Postal Code is required.' },
-      { type : 'pattern' , message: ' Postal Code must have 6 digit' }
-
      ],
      'mobile' : [
       { type : 'required' , message: 'Mobile Number is required.' },
@@ -66,12 +58,7 @@ export class RegisterPage implements OnInit {
       dob:['', [Validators.required]],
       pic:['', [Validators.required]],
       addr:['', [Validators.required]],
-      city:['', [Validators.required]],
-      state:['', [Validators.required]],
-      pincode:['', [Validators.compose([
-        Validators.required,
-        Validators.pattern('^[0-9]{6}$')
-      ]  )]],
+      reportingManager:['', [Validators.required]],
       mobile:['',[Validators.compose ([
         Validators.required,
         Validators.pattern('^[0-9]{10}$')])

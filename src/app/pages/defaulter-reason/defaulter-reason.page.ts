@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class DefaulterReasonPage implements OnInit {
 
-  myForm: FormGroup;
+  myForm: FormGroup;z
 
 
   constructor(private formsBuilder : FormBuilder) { 

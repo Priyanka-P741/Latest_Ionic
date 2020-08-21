@@ -2,8 +2,11 @@
   <ion-toolbar>
     <ion-title slot="start">Welcome user</ion-title>
     <ion-button slot="end" [routerLink]="['/profile']" color="warning">My Profile</ion-button>
-    <ion-button slot="end" href="tel:+91 83340 95538">Call us</ion-button>
-    <ion-button slot="end" [routerLink]="['/home']" (click)="afunction()" color="danger">Logout</ion-button>
+    <ion-button slot="end" (click)='afunction()' color="success">Check In</ion-button>
+    <ion-button slot="end" (click)='bfunction()' color="success">Check Out</ion-button>
+
+    <ion-button slot="end" color="primary" href="tel:+91 83340 95538">Call us</ion-button>
+    <ion-button slot="end" [routerLink]="['/home']" color="danger">Logout</ion-button>
   </ion-toolbar>
 </ion-header>
 
