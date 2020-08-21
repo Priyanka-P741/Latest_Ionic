@@ -25,11 +25,23 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
     path: 'user-home',
-    loadChildren: () => import('./user-home/user-home.module').then( m => m.UserHomePageModule)
+    loadChildren: () => import('./pages/user-home/user-home.module').then( m => m.UserHomePageModule)
+  },
+  {
+    path: 'profile-edit',
+    loadChildren: () => import('./pages/profile-edit/profile-edit.module').then( m => m.ProfileEditPageModule)
+  },
+  {
+    path: 'defaulter-reason',
+    loadChildren: () => import('./pages/defaulter-reason/defaulter-reason.module').then( m => m.DefaulterReasonPageModule)
+  },
+  {
+    path: 'defaulter-checkout',
+    loadChildren: () => import('./pages/defaulter-checkout/defaulter-checkout.module').then( m => m.DefaulterCheckoutPageModule)
   },
 ];
 

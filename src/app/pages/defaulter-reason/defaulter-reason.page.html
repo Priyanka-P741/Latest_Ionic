@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Reason Box</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<form [formGroup]="myForm">
+<p *ngIf="submitAttempt" style="color: #ea6153;">Please fill out all details accurately.</p>
+
+<ion-item>
+  <ion-label position="stacked" required>
+   Please fill your reason for Checking in late...
+  </ion-label>
+  <br>
+  <ion-textarea formControlName="reason" name="reason" auto-grow ></ion-textarea>
+</ion-item>
+<ion-button [disabled]="!myForm.valid"  [routerLink]="['/user-home']"  type="submit" color="danger" expand="block">OK</ion-button>
+</form>
+</ion-content>
+
+

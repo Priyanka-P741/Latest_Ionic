@@ -1,14 +1,14 @@
 <ion-header translucent no-border>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button color="warning"></ion-back-button>
     </ion-buttons>
     <ion-title slot="start">
     <ion-icon name="happy-outline"></ion-icon>
       My Profile&nbsp;</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon name="create-outline" color="dark"></ion-icon>
+      <ion-button [routerLink]="['/profile-edit']">
+        <ion-icon name="create-outline"></ion-icon>
         Edit
       </ion-button>
     </ion-buttons>
@@ -23,7 +23,7 @@
       <ion-label color="danger">ID</ion-label>
     </ion-chip>
   </ion-avatar>
-
+<br>
 <div class="ion-padding">
 
   <ion-item>

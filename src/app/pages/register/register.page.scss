@@ -1,3 +1,10 @@
+ion-content {
+    --background: url(src/assets/img/RegPage.png) no-repeat top center/cover fixed, #fff;
+    position: relative;
+    height: auto;
+    width: 100%;
+}
+
 p{
     color:red;
 }

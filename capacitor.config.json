@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "EmpMgmtApp",
+  "appId": "com.EmpMgmt.com",
+  "appName": "EmpMgmt",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

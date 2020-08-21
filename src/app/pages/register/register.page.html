@@ -1,18 +1,20 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="home" color="warning"></ion-back-button>
     </ion-buttons>
     <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!--required pattern="^\d{10}$"-->
+
 <ion-content>
-  <form [formGroup]="myForm">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <ion-item lines="full">
       <ion-icon name="person-outline"></ion-icon>
       <ion-label position="inline">Name</ion-label>
-      <ion-input type="text" formControlName="name"></ion-input>
+      <ion-input autocomplete="off" type="text" formControlName="name"></ion-input>
     </ion-item>
     <div>
       <ng-container *ngFor="let validation of validation_messages.name">
@@ -26,7 +28,7 @@
     <ion-item lines="full">
       <ion-icon name="mail-outline"></ion-icon>
       <ion-label position="inline">Personal Email</ion-label>
-      <ion-input type="email" formControlName="email"></ion-input>
+      <ion-input autocomplete="off" type="email" formControlName="email"></ion-input>
     </ion-item>
     <div>
       <ng-container *ngFor="let validation of validation_messages.email">
@@ -53,10 +55,11 @@
 
     <ion-item lines="full">
       <ion-icon name="image-outline"></ion-icon>
-      <ion-label position="floationg">Profile Picture</ion-label>
+      <ion-label position="inline">Profile Picture</ion-label>
       <img [src]="" style="width: 250;height: 200;">
       <input type="file" formControlName="pic" #Image accept="image/*">
-    </ion-item><div>
+    </ion-item>
+    <div>
       <ng-container *ngFor="let validation of validation_messages.pic">
         <div *ngIf="myForm.get('pic').hasError(validation.type) && myForm.get('pic').touched">
           <p>**{{validation.message}}</p>
@@ -68,7 +71,7 @@
     <ion-item lines="full">
       <ion-icon name="business-outline"></ion-icon>
       <ion-label position="inline">Address</ion-label>
-      <ion-input type="text" formControlName="addr"></ion-input>
+      <ion-input autocomplete="off" type="text" formControlName="addr"></ion-input>
     </ion-item>
     <div>
       <ng-container *ngFor="let validation of validation_messages.addr">
@@ -82,7 +85,7 @@
     <ion-item lines="full">
       <ion-icon name="trail-sign-outline"></ion-icon>
       <ion-label position="inline">City</ion-label>
-      <ion-input type="text" formControlName="city"></ion-input>
+      <ion-input autocomplete="off" type="text" formControlName="city"></ion-input>
     </ion-item>
     <div>
       <ng-container *ngFor="let validation of validation_messages.city">
@@ -96,7 +99,7 @@
     <ion-item lines="full">
       <ion-icon name="location-outline"></ion-icon>
       <ion-label position="inline">State</ion-label>
-      <ion-input type="text" formControlName="state"></ion-input>
+      <ion-input autocomplete="off" type="text" formControlName="state"></ion-input>
     </ion-item>
     <div>
       <ng-container *ngFor="let validation of validation_messages.state">
@@ -110,7 +113,7 @@
     <ion-item lines="full">
       <ion-icon name="earth-outline"></ion-icon>
       <ion-label position="inline">Postal Code</ion-label>
-      <ion-input type="text" formControlName="pincode"></ion-input>
+      <ion-input autocomplete="off" type="text" formControlName="pincode"></ion-input>
     </ion-item>
     <div>
       <ng-container *ngFor="let validation of validation_messages.pincode">
@@ -124,7 +127,7 @@
     <ion-item lines="full">
       <ion-icon name="call-outline"></ion-icon>
       <ion-label position="inline">Mobile Number</ion-label>
-      <ion-input type="number" formControlName="mobile"></ion-input>
+      <ion-input autocomplete="off" type="number" formControlName="mobile"></ion-input>
     </ion-item>
     <div>
       <ng-container *ngFor="let validation of validation_messages.mobile">
@@ -134,12 +137,9 @@
       </ng-container>
     </div>
     <br>
-
-
-
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="warning" expand="block">Sign Up</ion-button>
+        <ion-button [disabled]="!myForm.valid" type="submit" color="warning" expand="block" (click)="btnClicked()">Sign Up</ion-button>
       </ion-col>
     </ion-row>
   </form>

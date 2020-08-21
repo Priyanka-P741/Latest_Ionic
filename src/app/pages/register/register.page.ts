@@ -17,6 +17,7 @@ export class RegisterPage implements OnInit {
     ],
     'email' : [
       { type : 'required' , message: 'Email is required.' },
+      { type : 'pattern' , message: 'Please enter a valid email.' }
      ],
      'dob' : [
       { type : 'required' , message: 'Date of Birth is required.' },
@@ -35,24 +36,46 @@ export class RegisterPage implements OnInit {
      ],
      'pincode' : [
       { type : 'required' , message: 'Postal Code is required.' },
+      { type : 'pattern' , message: ' Postal Code must have 6 digit' }
+
      ],
      'mobile' : [
       { type : 'required' , message: 'Mobile Number is required.' },
+      { type : 'pattern' , message: 'Mobile Number must have 10 digit' }
+
      ]
 
+  }
+
+  onSubmit() {
+    console.log(this.myForm.value);
+  }
+
+  btnClicked(){
+    // // alert('btn clicked')
+    // this.router.navigate(['main-page']);
   }
 
   constructor(private formsBuilder : FormBuilder ) {
     this.myForm = formsBuilder.group({
       name:['', [Validators.required]],
-      email:['', [Validators.required], [Validators.email]],
+      email:['', [Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+[a-zA-Z0-9-.]$')
+      ])]],
       dob:['', [Validators.required]],
       pic:['', [Validators.required]],
       addr:['', [Validators.required]],
       city:['', [Validators.required]],
       state:['', [Validators.required]],
-      pincode:['', [Validators.required]],
-      mobile:['', [Validators.required]]
+      pincode:['', [Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]{6}$')
+      ]  )]],
+      mobile:['',[Validators.compose ([
+        Validators.required,
+        Validators.pattern('^[0-9]{10}$')])
+      ]]
     });
    }
 

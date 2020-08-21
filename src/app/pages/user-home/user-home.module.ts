@@ -8,11 +8,15 @@ import { UserHomePageRoutingModule } from './user-home-routing.module';
 
 import { UserHomePage } from './user-home.page';
 
+import { AgmCoreModule } from '@agm/core';
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    AgmCoreModule,
     UserHomePageRoutingModule
   ],
   declarations: [UserHomePage]

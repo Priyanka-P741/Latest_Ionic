@@ -1,33 +1,52 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button color="warning" defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title>Log In</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form>
-    <ion-item lines="full">
-      <ion-icon name="mail-outline"></ion-icon>
+  <p>{{d}}</p>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <ion-item lines="full">
+      <ion-icon class="custom-icon" name="mail-sharp"></ion-icon>
       <ion-label position="inline">Email</ion-label>
-      <ion-input type="text" required></ion-input>
+      <ion-input autocomplete="off" type="text" required></ion-input>
+      <div>
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div *ngIf="myForm.get('email').hasError(validation.type) && myForm.get('email').touched">
+            <small class="text-danger">**{{validation.message}}</small>
+          </div>
+        </ng-container>
+      </div>
     </ion-item>
-
+    <br>
     <ion-item lines="full">
-      <ion-icon name="key-outline"></ion-icon>
+      <ion-icon class="custom-icon" name="key-sharp"></ion-icon>
             <ion-label position="inline">Password</ion-label>
-      <ion-input type="password" required></ion-input>
+      <ion-input autocomplete="off" type="password"></ion-input>
+      <div>
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <div *ngIf="myForm.get('password').hasError(validation.type) && myForm.get('password').touched">
+            <small class="text-danger">**{{validation.message}}</small>
+          </div>
+        </ng-container>
+      </div>
     </ion-item>
 
     <ion-row>
       <ion-col>
-        <ion-button [routerLink]="['/user-home']" type="submit" color="warning" expand="block">Sign In</ion-button>
+        <ion-button [routerLink]="['/user-home']" (click)="afunction()" type="submit" color="warning" expand="block">Sign In</ion-button>
         <a [routerLink]="['/forgotpassword']" class="small-text">Forgot Password?</a>
         <br>
         <a [routerLink]="['/register']" class="small-text">Create Account?</a>
       </ion-col>
     </ion-row>
  </form>
+ <!-- <span *ngIf="processing">
+  <ion-spinner></ion-spinner>
+  <h1>Processing...</h1>
+</span> -->
 </ion-content>
