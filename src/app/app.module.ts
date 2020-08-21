@@ -21,7 +21,7 @@ import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), 
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyCtNH7PZEAwAc_VyHM03afa0-rgXS0wqXk',libraries: ['places']}), AppRoutingModule],
+    AgmCoreModule.forRoot({apiKey: 'API Key Here',libraries: ['places']}), AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
