@@ -9,24 +9,23 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { AgmCoreModule } from '@agm/core';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 import { Device } from '@ionic-native/device/ngx';
-import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
-
 // import { Push } from '@ionic-native/push/ngx';
 
-
+// AIzaSyAS7V8i-jr1ctRkAQJMQrfDgdEkzrjv0pE
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), 
-    AgmCoreModule.forRoot({apiKey: 'API Key Here',libraries: ['places']}), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
     Device,
-    UniqueDeviceID,
+    Geolocation,
+    NativeGeocoder,
     // Push,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

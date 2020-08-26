@@ -1,46 +1,83 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title slot="start">Welcome user</ion-title>
-    <ion-button slot="end" [routerLink]="['/profile']" color="warning">My Profile</ion-button>
-    <ion-button slot="end" (click)='afunction()' color="success">Check In</ion-button>
-    <ion-button slot="end" (click)='bfunction()' color="success">Check Out</ion-button>
-
-    <ion-button slot="end" color="primary" href="tel:+91 83340 95538">Call us</ion-button>
-    <ion-button slot="end" [routerLink]="['/home']" color="danger">Logout</ion-button>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title slot="start">Welcome User</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-item>
-    <ion-label>
-      Current Date : {{ today | date: 'dd/MM/yyyy' }}
-    </ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>
-      Current Time : {{ today | date: 'HH:mm' }}
-    </ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>
-      Current Latitude : {{latitude}}
-    </ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>
-      Current Longitude : {{longitude}}
-    </ion-label>
-  </ion-item>
-    
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" [disableDefaultUI]="false">
-    <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]=true></agm-marker>
-    </agm-map>
+
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button color="tertiary" expand="full" (click)='afunction()'>Check In</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button color="tertiary" expand="full" (click)='bfunction()'>Check Out</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="map-wrapper">
+    <div id="map_center">
+      <img src="assets/icon/location-marker.png" />
+    </div>
+    <div #map id="map"></div>
+  </div>
+  <ion-button color="warning" expand="full" (click)="loadMap()">Find me</ion-button>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <b> Current Date</b>
+      </ion-col>
+      <ion-col>
+        {{ today | date: 'dd/MM/yyyy' }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <b> Device ID</b>
+      </ion-col>
+      <ion-col>
+        {{ deviceId }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <b>Current Time</b>
+      </ion-col>
+      <ion-col>
+        {{ today | date: 'HH:mm'}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <b>Lattitude</b>
+      </ion-col>
+      <ion-col>
+        {{latitude}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <b>Longitude</b>
+      </ion-col>
+      <ion-col>
+        {{longitude}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <b>Address</b>
+      </ion-col>
+      <ion-col>
+        {{address}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button color="tertiary" expand="full" href="tel:+91 83340 95538">Contact</ion-button>
 </ion-content>
-
-<!-- <ion-content> -->
-
-<!-- </ion-content> -->
-
-<!-- <ion-footer>
-  <button ion-button color="light" full (click)="testMarker()">Test Marker</button>
-</ion-footer> -->

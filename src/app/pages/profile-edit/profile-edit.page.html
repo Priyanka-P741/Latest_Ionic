@@ -3,53 +3,48 @@
     <ion-buttons slot="start">
       <ion-back-button color="warning"></ion-back-button>
     </ion-buttons>
-    <ion-title slot="start">
+    <ion-title class="ion-text-center">
       Edit Profile&nbsp;</ion-title>
-      <ion-buttons slot="end">
-        <ion-button>
-          <ion-icon name="checkmark-sharp" class="custom-icon"></ion-icon>
-          Save
-        </ion-button>
-      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
   <div class="ion-padding">
 
     <ion-item>
       <ion-label position="inline">Name :</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input formControlName="name" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="inline">Designation :</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input formControlName="designation" type="text"></ion-input>
     </ion-item>
       <ion-item>
         <ion-label position="inline">Reporting Manager :</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input formControlName="reportingmanager" type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="inline">Hardware Allotted :</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input formControlName="hardwarealloted" type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="inline">Personal Email :</ion-label>
-        <ion-input type="email"></ion-input>
+        <ion-input formControlName="email" type="email"></ion-input>
     </ion-item>
     <ion-item lines="full"> 
       <ion-label position="inline">Profile Picture</ion-label>
-      <img [src]="" style="width: 250;height: 200;">
-      <input type="file" #Image accept="image/*">
+      <ion-input formControlName="pic" type="file" accept="image/*"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="inline">Address :</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input formControlName="addr" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="inline">Mobile Number :</ion-label>
-      <ion-input type="number"></ion-input>
+      <ion-input formControlName="mobile" type="number"></ion-input>
     </ion-item>
 </div>
+<ion-button fill="outline" shape="round" type="submit" expand="block" (click)="btnClicked()">Save</ion-button>
+</form>
 </ion-content>

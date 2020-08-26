@@ -1,13 +1,10 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { Plugins } from '@capacitor/core';
-const { Geolocation } = Plugins;
 import { Device } from '@ionic-native/device/ngx';
-import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
-// import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
-
-
+declare var google;
 
 
 @Component({
@@ -17,17 +14,19 @@ import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 })
 export class UserHomePage implements OnInit {
 
+  deviceId= 'test123';
+
+  @ViewChild('map', { static: false }) mapElement: ElementRef;
+  map: any;
+  address: string;
+
   x: Number = 30;  // 30 Seconds
 
   flag=0;
 
   latitude:number;
   longitude:number;
-  coords:any;
-  public lat:any;
-  public lng:any;
-  showingCurrent: boolean = true;
-  
+
   public today;
 
   d: Date = new Date();
@@ -36,49 +35,20 @@ export class UserHomePage implements OnInit {
   t = "" + this.h + this.m;
   time= Number(this.t);
 
-  UniqueDeviceID:string;
 
-  constructor(private router: Router, private ngZone:NgZone, private device: Device, private uniqueDeviceID: UniqueDeviceID) {
-    this.getUniqueDeviceID();
+  constructor(private router: Router, private device: Device, private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder) {
    }
    
-  async locate() {
-    const coordinates = await Geolocation.getCurrentPosition();
-    this.showingCurrent = true;
-    this.coords = coordinates.coords;
-    console.log(this.coords);
-    this.latitude = coordinates.coords.latitude;
-    this.longitude = coordinates.coords.longitude;
-  }
-
-  async locatemap() {
-    const coordinates = await Geolocation.getCurrentPosition();
-    this.ngZone.run(() => {
-      this.lat = coordinates.coords.latitude;
-      this.lng = coordinates.coords.longitude;
-      console.log(this.coords);
-      this.latitude = coordinates.coords.latitude;
-      this.longitude = coordinates.coords.longitude;
-    })
-  }
-
-  getUniqueDeviceID() {
-    this.uniqueDeviceID.get()
-      .then((uuid: any) => {
-        console.log(uuid);
-        this.UniqueDeviceID = uuid;
-      }).catch((error: any) => {
-        console.log(error);
-        this.UniqueDeviceID = "Error! ${error}";
-      });
-  }
-
   afunction() {
     (this.time > 1000 && this.time < 1800) || (this.time > 100 && this.time < 180)  ? this.flag=1 : console.log ('time ok');
     console.log(this.time);
     if(this.flag==1){
       this.router.navigate(['/defaulter-reason']);
     }
+    else{
+      alert("You are Checked-In");
+      console.log(this.time);} 
   }
   
   bfunction(){
@@ -92,53 +62,72 @@ export class UserHomePage implements OnInit {
       console.log(this.time);} 
   }
 
-// pushNotif(){
-//   // Create a channel (Android O and above). You'll need to provide the id, description and importance properties.
-// this.push.createChannel({
-//   id: "testchannel1",
-//   description: "My first test channel",
-//   // The importance property goes from 1 = Lowest, 2 = Low, 3 = Normal, 4 = High and 5 = Highest.
-//   importance: 3,
-//   //badge is used to if badge appears on the app icon see https://developer.android.com/reference/android/app/NotificationChannel.html#setShowBadge(boolean).
-//   //false = no badge on app icon.
-//   //true = badge on app icon
-//   badge: false
-//  }).then(() => console.log('Channel created'));
- 
-//  // Delete a channel (Android O and above)
-//  this.push.deleteChannel('testchannel1').then(() => console.log('Channel deleted'));
- 
-//  // Return a list of currently configured channels
-//  this.push.listChannels().then((channels) => console.log('List of channels', channels))
- 
-//  // to initialize push notifications
- 
-//  const options: PushOptions = {
-//     android: {},
-//     ios: {
-//         alert: 'true',
-//         badge: true,
-//         sound: 'false'
-//     },
-//     windows: {},
-//     browser: {
-//         pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-//     }
-//  }
- 
-//  const pushObject: PushObject = this.push.init(options);
- 
- 
-//  pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
- 
-//  pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
- 
-//  pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
- 
-// }
+  loadMap() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+
+      this.latitude = resp.coords.latitude;
+      this.longitude = resp.coords.longitude;
+
+      let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      let mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+
+      this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
+
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+      this.map.addListener('dragend', () => {
+
+        this.latitude = this.map.center.lat();
+        this.longitude = this.map.center.lng();
+
+        this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng())
+      });
+
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }
+
+  getAddressFromCoords(latitude, longitude) {
+    console.log("getAddressFromCoords " + latitude + " " + longitude);
+    let options: NativeGeocoderOptions = {
+      useLocale: true,
+      maxResults: 5
+    };
+
+    this.nativeGeocoder.reverseGeocode(latitude, longitude, options)
+      .then((result: NativeGeocoderResult[]) => {
+        this.address = "";
+        let responseAddress = [];
+        for (let [key, value] of Object.entries(result[0])) {
+          if (value.length > 0)
+            responseAddress.push(value);
+
+        }
+        responseAddress.reverse();
+        for (let value of responseAddress) {
+          this.address += value + ", ";
+        }
+        this.address = this.address.slice(0, -2);
+      })
+      .catch((error: any) => {
+        this.address = "Address Not Available!";
+      });
+
+  }
+locate(){
+console.log('Latitude:' + this.latitude + 'and Longitude:' + this.longitude)
+}
 
 
   ngOnInit() {
+
+    this.loadMap();
+
     console.log(this.d);
     console.log(typeof this.d);
 
@@ -154,14 +143,8 @@ export class UserHomePage implements OnInit {
     console.log(this.time);
     console.log(typeof this.time);
 
-    this.locatemap();
+    // console.log('Device UUID is: ' + this.device.uuid);
 
-    console.log('Device UUID is: ' + this.device.uuid);
-
-    this.getUniqueDeviceID();  
-    // .then((uuid: any) => console.log('again device id here:' + uuid))
-  // .catch((error: any) => console.log(error));
-  //  this.pushNotif();
   setInterval(()=>{
     this.locate();
   }, 30000)

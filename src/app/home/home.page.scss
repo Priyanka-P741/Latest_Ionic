@@ -7,12 +7,29 @@
 .already {
   display: block;
   text-align: center;
-  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
 
 ion-content {
-  --background: url(../../assets/img/empcover.png) no-repeat top center/cover fixed, #fff;
+  // --background: url(../../assets/img/empcover.png) no-repeat 0 0/100% 100% , #fff;
+  --background-size: contain;
   position: relative;
   height: auto;
   width: 100%;
+}
+
+.bottom_pos {
+  position: fixed;
+  left: 0;
+  bottom: 20px;
+  right: 0;
+}
+
+ion-toolbar{
+--background: rgb(56, 128, 255);
+}
+
+ion-title{
+  --color	:white;
 }

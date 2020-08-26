@@ -1,13 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Reason Box</ion-title>
+    <ion-title class="ion-text-center">Reason Box</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 <form [formGroup]="myForm">
-<p *ngIf="submitAttempt" style="color: #ea6153;">Please fill out all details accurately.</p>
-
 <ion-item>
   <ion-label position="stacked" required>
    Please fill your reason for Checking out early...

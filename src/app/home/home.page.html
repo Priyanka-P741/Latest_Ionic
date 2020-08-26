@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      <h1>Employee Management</h1>
+    <ion-title class="ion-text-center">
+      Employee Management
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,13 @@
 <ion-content class="auth-form">
   <ion-grid>
     <ion-row>
-      <ion-col align-self-center>
-        <ion-button [routerLink]="['/register']" expand="block" color="warning">Register</ion-button>
+      <ion-img src="../../assets/img/home-img.jpg"></ion-img>
+        <ion-col align-self-center class="bottom_pos">
+        <ion-button fill="outline" shape="round" [routerLink]="['/register']" expand="block">Register</ion-button>
 
         <span class="already"><small>New User?</small></span>
 
-        <ion-button [routerLink]="['/login']" expand="block" color="warning">Sign In</ion-button>
+        <ion-button fill="outline" shape="round" [routerLink]="['/login']" expand="block">Sign In</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

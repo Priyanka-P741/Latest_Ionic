@@ -1,5 +1,5 @@
 ion-content {
-    --background: url(src/assets/img/RegPage.png) no-repeat top center/cover fixed, #fff;
+    // --background: url(src/assets/img/RegPage.png) no-repeat top center/cover fixed, #fff;
     position: relative;
     height: auto;
     width: 100%;
@@ -9,5 +9,23 @@ ion-content {
 .custom-icon {
     font-size: 30px;
     color : "warning";
+  }
+  
+.bottom_pos {
+  position: fixed;
+  left: 0;
+  bottom: 20px;
+  right: 0;
+}
+    
+p{
+    color:red;
+}
+  
+ion-toolbar{
+  --background: rgb(56, 128, 255);
+}
+ion-title{
+    --color	:white;
   }
   

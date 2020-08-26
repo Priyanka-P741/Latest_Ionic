@@ -1,15 +1,15 @@
 ion-content {
-    --background: url(src\assets\img\profile_edit.png) no-repeat top center/cover fixed, #fff;
+    // --background: url(src\assets\img\profile_edit.png) no-repeat top center/cover fixed, #fff;
+    // --background :#dcdde8;
     position: relative;
     height: auto;
     width: 100%;
 }
 
 ion-toolbar {
-    --background: transparent;
-}
-ion-button{
-    color: green;
+    // --background: transparent;
+    --background: rgb(56, 128, 255);
+    --color:white;
 }
 
 ion-item{
@@ -19,6 +19,6 @@ ion-item{
 
 .custom-icon {
     font-size: 30px;
-    color : red;
+    color :white;
   }
   

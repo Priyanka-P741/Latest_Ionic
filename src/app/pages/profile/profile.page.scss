@@ -1,12 +1,15 @@
 ion-content {
-    --background: url(src/assets/img/empProfile_cover.jpg) no-repeat top center/cover fixed, #fff;
+    // --background: url(src/assets/img/empProfile_cover.jpg) no-repeat top center/cover fixed, #fff;
+    --background :#dcdde8;
     position: relative;
     height: auto;
     width: 100%;
 }
 
 ion-toolbar {
-    --background: transparent;
+    // --background: transparent;
+    --background: rgb(56, 128, 255);
+    --color:white;
 }
 ion-button{
     color:"warning";
@@ -14,7 +17,7 @@ ion-button{
 
 ion-item{
     --background: transparent;
-    color: blueviolet;
+    color: blue;
 }
 
 .avatar{
