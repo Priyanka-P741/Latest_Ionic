@@ -15,7 +15,6 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { Device } from '@ionic-native/device/ngx';
 // import { Push } from '@ionic-native/push/ngx';
 
-// AIzaSyAS7V8i-jr1ctRkAQJMQrfDgdEkzrjv0pE
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

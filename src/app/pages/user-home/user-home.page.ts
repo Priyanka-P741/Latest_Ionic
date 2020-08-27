@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { Device } from '@ionic-native/device/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { AlertController } from '@ionic/angular';
+
 
 declare var google;
-
 
 @Component({
   selector: 'app-user-home',
@@ -15,6 +16,10 @@ declare var google;
 export class UserHomePage implements OnInit {
 
   deviceId= 'test123';
+  
+  disabledButton;
+
+  disappear: boolean = true;
 
   @ViewChild('map', { static: false }) mapElement: ElementRef;
   map: any;
@@ -37,12 +42,13 @@ export class UserHomePage implements OnInit {
 
 
   constructor(private router: Router, private device: Device, private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder) {
+    private nativeGeocoder: NativeGeocoder, private alertCtrl: AlertController) {
    }
    
   afunction() {
     (this.time > 1000 && this.time < 1800) || (this.time > 100 && this.time < 180)  ? this.flag=1 : console.log ('time ok');
     console.log(this.time);
+    this.disappear= !this.disappear;
     if(this.flag==1){
       this.router.navigate(['/defaulter-reason']);
     }
@@ -54,6 +60,7 @@ export class UserHomePage implements OnInit {
   bfunction(){
     (this.time < 1800 && this.time > 1000) || (this.time < 180 && this.time > 100) ? this.flag=1 : console.log ('time ok');
     console.log(this.time);
+    this.checkOutDisabled();
     if(this.flag==1){
       this.router.navigate(['/defaulter-checkout']);
     }
@@ -61,6 +68,34 @@ export class UserHomePage implements OnInit {
       alert("You are Checked-Out");
       console.log(this.time);} 
   }
+
+  checkOutDisabled(){
+    this.disabledButton=true;
+  }   
+
+  async showConfirm() { 
+    const confirm = await this.alertCtrl.create({ 
+    header: 'Confirmation', 
+    message: 'Are you sure you want to checkout?', 
+    buttons: [
+    { 
+    text: 'Yes',
+    role: 'Ok', 
+    handler: () => {  
+      this.bfunction();
+    } 
+    }, 
+    { 
+    text: 'No', 
+    role: 'Cancel',
+    handler: () => { 
+      this.router.navigate(['/user-home']);
+    } 
+    } 
+    ] 
+    }); 
+    await confirm.present(); 
+    } 
 
   loadMap() {
     this.geolocation.getCurrentPosition().then((resp) => {
