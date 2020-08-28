@@ -1,0 +1,8 @@
+{
+  "name": "EmpMgmtApp",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

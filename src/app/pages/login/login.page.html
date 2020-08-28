@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="warning" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Log In</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div style="padding-top: 20px;">
+      <ion-item  lines="full">
+      <ion-icon class="custom-icon" name="mail-sharp"></ion-icon>&nbsp;
+      <ion-label position="inline">Employee ID</ion-label>
+      <ion-input autocomplete="off" formControlName="empId" type="text"></ion-input>
+    </ion-item>
+      <div>
+        <ng-container *ngFor="let validation of validation_messages.empId">
+          <div *ngIf="myForm.get('empId').hasError(validation.type) && myForm.get('empId').touched">
+            <p>**{{validation.message}}</p>
+          </div>
+        </ng-container>
+      </div>
+    <br>
+    <ion-item lines="full">
+      <ion-icon class="custom-icon" name="key-sharp"></ion-icon>&nbsp;
+      <ion-label position="inline">Password</ion-label>
+      <ion-input autocomplete="off" formControlName="password" type="password"></ion-input>
+    </ion-item>
+      <div>
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <div *ngIf="myForm.get('password').hasError(validation.type) && myForm.get('password').touched">
+            <p>**{{validation.message}}</p>
+          </div>
+          <br>
+          <ion-item>
+            <ion-icon name="desktop-sharp"></ion-icon>&nbsp;
+            <ion-label position="inline">
+                  Device Id</ion-label>
+            <ion-input autocomplete="off" type="text"  formControlName="device_id" ></ion-input>
+            </ion-item>
+            <div>
+              <ng-container *ngFor="let validation of validation_messages.device_id">
+                <div *ngIf="myForm.get('device_id').hasError(validation.type) && myForm.get('device_id').touched">
+                  <small class="text-danger">**{{validation.message}}</small>
+                </div>
+              </ng-container>
+            </div>
+        </ng-container>
+      </div>
+</div>
+    <ion-row style="padding-top:30px;">      
+      <ion-col>
+        <ion-button fill="outline" shape="round" (click)="sendPostRequest()" [disabled]="!myForm.valid" type="submit" expand="block">Sign In</ion-button>
+        <ion-button fill="outline" shape="round" color="warning" [routerLink]="['/forgotpassword']"  expand="block">Forgot Password?</ion-button>
+        <ion-button fill="outline" shape="round" color="success" [routerLink]="['/register']" expand="block">Create Account?</ion-button>
+      </ion-col>
+    </ion-row>
+ </form>
+ <!-- <span *ngIf="processing">
+  <ion-spinner></ion-spinner>
+  <h1>Processing...</h1>
+</span> -->
+</ion-content>
