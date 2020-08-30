@@ -7,7 +7,6 @@ import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { HttpClient,HttpHeaders,HttpRequest} from '@angular/common/http';
 
-
 declare var google;
 
 @Component({
@@ -17,7 +16,7 @@ declare var google;
 })
 export class UserHomePage implements OnInit {
   device_id:string;
-  deviceId= this.device_id;
+  deviceId:string = this.device_id;
   
   disabledButton;
 
@@ -31,16 +30,18 @@ export class UserHomePage implements OnInit {
 
   flag=0;
 
-  latitude:number;
-  longitude:number;
+  latitude:any;
+  longitude:any;
 
   private _checkinUrl ="https://emp-manage90.herokuapp.com/attendence/check-in"
   private _checkoutUrl ="https://emp-manage90.herokuapp.com/attendence/check-out"
   //get items from localstorage items
   items:any = {};
-  key:string ='items';
-  token:string;
-  empId:string;
+  key:string ="items";
+  
+
+  token:any;
+  empId:any;
 //set checkinItems in localstorage checkinItems
   checkinItems:any = [];
   nextKey:string ='checkinItems';
@@ -128,28 +129,102 @@ console.log('Latitude:' + this.latitude + 'and Longitude:' + this.longitude)
     this.loadMap();
 
     console.log(this.d);
-  setInterval(()=>{
-    this.locate();
-  }, 30000)
 
-  setInterval(()=>{
+    setInterval(()=>{
+    this.locate();
+    }, 30000)
+
+    setInterval(()=>{
     this.today = Date.now() }, 1000)
+
+    this.getData();
+    
   }
 
+  // read the data from local storage
+  getData(){
+    this.storage.get(this.key).then((val)=>{
+      if(val!=null && val!=undefined){
+        this.items =JSON.parse(val);
+        this.token =this.items.token;
+        console.log(this.items.token);
+        console.log(this.items.data.empId);
+        this.empId =this.items.data.empId;
+        this.device_id =this.items.data.device_id;
+      }
+    })
+  }
 
+//condition for check in
 
   afunction() {
-    (this.time > 1000 && this.time < 1800) || (this.time > 100 && this.time < 180)  ? this.flag=1 : console.log ('time ok');
+    (this.time > 1000) || (this.time > 100)  ? this.flag=1 : console.log ('time ok');
     console.log(this.time);
     //this.disappear= !this.disappear;
     if(this.flag==1){
       this.router.navigate(['/defaulter-reason']);
+      this.disappear= !this.disappear;
     }
     else{
       this.sendPostRequest();
       } 
   }
+
+
+  sendPostRequest() {
+    const headers = new HttpHeaders()
+    //.append('Content-Type', 'application/json')
+    .append('Authorization',	this.token)
+    .append('Access-Control-Allow-Headers', '*')
+    .append('Access-Control-Allow-Methods', "GET, POST, DELETE, PUT")
+    .append('Access-Control-Allow-Origin', '*');
+    
+    let inputs = {
+      "inTime":"",
+      "lat":this.latitude,
+      "lon":this.longitude,
+      "empId":this.empId
+    }
+    this.httpClient.post(this._checkinUrl,inputs,{headers} )
+      .subscribe(data => {
+        console.log(data);
+        this.checkinItems = data;
+          this.storage.set(this.nextKey,JSON.stringify(this.checkinItems));
+          if(!this.checkinItems.error){
+            alert("You are Checked-In");
+            //this.disappear= !this.disappear;
+          }else{
+            this.alertError();
+          }    
+        }, error => {
+        console.log(error);
+      });
+}
   
+//alert for check out
+
+async showConfirm() { 
+  const confirm = await this.alertCtrl.create({ 
+  header: 'Confirmation', 
+  message: 'Are you sure you want to checkout?', 
+  buttons: [{ 
+  text: 'Yes',
+  role: 'Ok', 
+  handler: () => {  
+    this.bfunction();
+  } 
+}, { 
+  text: 'No', 
+  role: 'Cancel',
+  handler: () => { 
+    this.router.navigate(['/user-home']);
+  } }] 
+}); 
+  await confirm.present(); 
+} 
+
+//condition for check out
+
   bfunction(){
     (this.time < 1800 && this.time > 1000) || (this.time < 180 && this.time > 100) ? this.flag=1 : console.log ('time ok');
     console.log(this.time);
@@ -160,68 +235,9 @@ console.log('Latitude:' + this.latitude + 'and Longitude:' + this.longitude)
     else{
           this.sendPutRequest();
     } 
-  }
-
-  checkOutDisabled(){
-    this.disabledButton=true;
-  }   
-
-  async showConfirm() { 
-    const confirm = await this.alertCtrl.create({ 
-    header: 'Confirmation', 
-    message: 'Are you sure you want to checkout?', 
-    buttons: [
-    { 
-    text: 'Yes',
-    role: 'Ok', 
-    handler: () => {  
-      this.bfunction();
-    } 
-    }, 
-    { 
-    text: 'No', 
-    role: 'Cancel',
-    handler: () => { 
-      this.router.navigate(['/user-home']);
-    } 
-    } 
-    ] 
-    }); 
-    await confirm.present(); 
-    } 
-
-
-
-    sendPostRequest() {
-      const headers = new HttpHeaders()
-      .append('Content-Type', 'application/json')
-      .append('Authorization',	this.token)
-      .append('Access-Control-Allow-Headers', 'Content-Type')
-      .append('Access-Control-Allow-Methods', "GET, POST, DELETE, PUT")
-      .append('Access-Control-Allow-Origin', '*');
-      
-      let inputs = {
-        "inTime":this.d,
-        "lat":this.latitude,
-        "lon":this.longitude,
-        "empId":this.empId
-      }
-      this.httpClient.post(this._checkinUrl,inputs,{headers} )
-        .subscribe(data => {
-          console.log(data);
-          this.checkinItems = data;
-            this.storage.set(this.nextKey,JSON.stringify(this.checkinItems));
-            if(!this.items.error){
-              alert("You are Checked-In");
-            }else{
-              this.alertError();
-            }    
-          }, error => {
-          console.log(error);
-        });
-  }
-  
-  
+  } 
+   
+    
   sendPutRequest(){
     const headers = new HttpHeaders()
       .append('Content-Type', 'application/json')
@@ -229,7 +245,8 @@ console.log('Latitude:' + this.latitude + 'and Longitude:' + this.longitude)
       .append('Access-Control-Allow-Headers', 'Content-Type')
       .append('Access-Control-Allow-Methods', "GET, POST, DELETE, PUT")
       .append('Access-Control-Allow-Origin', '*');
-      
+      console.log(this.empId,this.token)
+
       let inputs = {
         "outTime":this.d,
         "empId":this.empId
@@ -239,7 +256,7 @@ console.log('Latitude:' + this.latitude + 'and Longitude:' + this.longitude)
           console.log(data);
           this.checkinItems = data;
             this.storage.set(this.nextKey,JSON.stringify(this.checkinItems));
-            if(!this.items.error){
+            if(!this.checkinItems.error){
            alert("You are Checked-Out");
             }else{
               this.alertError();
@@ -249,35 +266,11 @@ console.log('Latitude:' + this.latitude + 'and Longitude:' + this.longitude)
         });
   }
   
-  getData(){
-    this.storage.get(this.key).then((val)=>{
-      if(val!=null && val!=undefined){
-        this.items =JSON.parse(val);
-        this.token =this.items.token;
-        this.empId =this.items.data.empId;
-        this.device_id =this.items.data.device_id;
-      }
-    })
-  }
-
-  async alert(){
-    const alert = await this.alertCtrl.create({
-      header: 'successfull',
-      message: this.items.message,
-      buttons: [{
-        text: 'Ok',
-            handler: () => {
-              this.router.navigate(['/user-home']);
-            }
-      }]
-    });
-    await alert.present();
-  }
 
   async alertError(){
     const alert = await this.alertCtrl.create({
       header: 'Unseccessfull',
-      message: this.items.message,
+      message: this.checkinItems.message,
       buttons: [{
         text: 'Ok',
             handler: () => {
@@ -287,4 +280,9 @@ console.log('Latitude:' + this.latitude + 'and Longitude:' + this.longitude)
     });
     await alert.present();
   }
+
+  checkOutDisabled(){
+    this.disabledButton=true;
+  }  
+
   }

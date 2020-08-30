@@ -105,7 +105,7 @@ getData(){
   this.storage.get(this.key).then((val)=>{
     if(val!=null && val!=undefined){
       this.items =JSON.parse(val);
-      console.log(this.items.token);
+      //console.log(this.items.token);
       this.token =this.items.token;
       
     }

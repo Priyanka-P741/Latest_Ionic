@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient,HttpHeaders,HttpRequest} from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
+import {RegistrationService} from '../../services/registration.service'
 
 @Component({
   selector: 'app-login',
@@ -75,11 +76,7 @@ export class LoginPage implements OnInit {
         this.storage.set(this.key,JSON.stringify(this.items));
         this.storage.set(this.Key,JSON.stringify(this.mytoken));
         if(!this.items.error){
-          if(this.items.data.isnewUser){
-            this.router.navigate(['forgotpassword']);
-          }else{
-            this.router.navigate(['user-home']);
-          }
+          this.alertSuccess()
         }else{
           this.alert();
         }
@@ -102,5 +99,48 @@ async alert(){
   });
   await alert.present();
 }
-
+async alertSuccess(){
+  const alert = await this.alertController.create({
+    header: 'Seccessfull Login',
+    message: 'User Login Successfully',
+    buttons: [{
+      text: 'Ok',
+          handler: () => {
+            if(this.items.data.isnewUser){
+              this.router.navigate(['forgotpassword']);
+            }else{
+              this.router.navigate(['user-home']);
+            }          }
+    }]
+  });
+  await alert.present();
 }
+}
+
+
+
+
+
+// sendPostRequest() {
+//   console.log(this.myForm.value.empId);
+
+//   this.loginService.loginPost(
+//     this.myForm.value.empId,
+//     this.myForm.value.password,
+//     this.myForm.value.device_id
+//     ).subscribe(data => {
+//       console.log(data);
+//       this.items = data;
+//       this.mytoken = data;
+//       this.storage.set(this.key,JSON.stringify(this.items));
+//       this.storage.set(this.Key,JSON.stringify(this.mytoken));
+//       if(!this.items.error){
+//         this.alertSuccess();
+//       }else{
+//         this.alert();
+//       }
+//      }, error => {
+//       console.log(error);
+//     });
+   
+// }

@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
   templateUrl: './profile-edit.page.html',
   styleUrls: ['./profile-edit.page.scss'],
 })
+
 export class ProfileEditPage implements OnInit {
   items:any = {};
   key:string ='items';
@@ -20,7 +21,7 @@ export class ProfileEditPage implements OnInit {
     name: string;
     email: string;
     dob: any;
-    profile_pic: string;
+    image: any;
     address: string;
     manager: string;
     phone_no: Number;
@@ -44,7 +45,7 @@ myForm: FormGroup;
       manager: new FormControl(''),
       hardware: new FormControl(''),
       email: new FormControl(''),
-      pic: new FormControl(''),
+      image: new FormControl(''),
       addr: new FormControl(''),
       phone_no: new FormControl(''),
       dob: new FormControl('')
@@ -62,6 +63,17 @@ myForm: FormGroup;
     this.getData();
 
   }
+
+  
+  onFileSelected(event){
+    const file = (event.target as HTMLInputElement).files[0];
+    this.myForm.patchValue({
+      image:file
+    });
+    this.myForm.get('image').updateValueAndValidity()  
+    console.log('gtdyuetwhuwierhie',file);
+      
+  } 
 
   sendPutRequest() {
     
@@ -96,7 +108,7 @@ myForm: FormGroup;
         this.empId =this.items.data.empId;
         this.email =this.items.data.email;
         this.dob =this.items.data.dob;
-        this.profile_pic =this.items.data.profile_pic;
+        this.image =this.items.data.image;
         this.address =this.items.data.address;
         this.manager =this.items.data.manager;
         this.phone_no =this.items.data.phone_no;
@@ -121,7 +133,7 @@ myForm: FormGroup;
   }
   async alert(){
     const alert = await this.alertController.create({
-      header: 'Update Profile',
+      header: 'Successfull',
       message: 'Successfully updated profile.',
       buttons: [{
         text: 'Ok',

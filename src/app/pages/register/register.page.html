@@ -56,11 +56,11 @@
     <ion-item lines="full">
       <ion-icon name="image-outline"></ion-icon>&nbsp;
       <ion-label position="inline">Profile Picture</ion-label>
-      <ion-input type="file" accept="image/*" formControlName="profile_pic"></ion-input>
+      <ion-input type="file" (change)="onFileSelected($event)" accept="image/*" formControlName="image"></ion-input>
     </ion-item>
     <div>
-      <ng-container *ngFor="let validation of validation_messages.profile_pic">
-        <div *ngIf="myForm.get('profile_pic').hasError(validation.type) && myForm.get('profile_pic').touched">
+      <ng-container *ngFor="let validation of validation_messages.image">
+        <div *ngIf="myForm.get('image').hasError(validation.type) && myForm.get('image').touched">
           <p>**{{validation.message}}</p>
         </div>
       </ng-container>

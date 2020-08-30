@@ -18,7 +18,7 @@ export class DefaulterReasonPage implements OnInit {
   private _checkinUrl ="https://emp-manage90.herokuapp.com/attendence/check-in"
   //get items from localstorage items
   items:any = {};
-  key:string ='items';
+  key:string ="items";
   token:string;
   empId:string;
  //set checkinItems from localstorage checkinItems
@@ -26,15 +26,15 @@ export class DefaulterReasonPage implements OnInit {
   nextKey:string ='checkinItems';
   
   d: Date = new Date();
-  latitude:number;
-  longitude:number;
+  lat:number;
+  lon:number;
   
  
    myForm: FormGroup;
 
   constructor(private router: Router,private geolocation: Geolocation,private alertCtrl: AlertController,private formsBuilder : FormBuilder,public httpClient:HttpClient,public storage:Storage) { 
     this.myForm = formsBuilder.group({
-    'reason':['', Validators.compose([Validators.maxLength(50), Validators.minLength(20), Validators.required])],
+    'lateInReason':['', Validators.compose([Validators.maxLength(50), Validators.minLength(20), Validators.required])],
   }); 
 }
 onSubmit(){
@@ -44,10 +44,10 @@ onSubmit(){
 loadMap() {
   this.geolocation.getCurrentPosition().then((resp) => {
 
-    this.latitude = resp.coords.latitude;
-    this.longitude = resp.coords.longitude;
-    console.log(this.latitude);
-    console.log(this.longitude);
+    this.lat = resp.coords.latitude;
+    this.lon = resp.coords.longitude;
+    console.log(this.lat);
+    console.log(this.lon);
 
   })
 }
@@ -59,7 +59,7 @@ loadMap() {
 
 
   sendPostRequest() {
-    //this.router.navigate(['login']);
+    
     const headers = new HttpHeaders()
     .append('Content-Type', 'application/json')
     .append('Authorization',	this.token)
@@ -69,17 +69,17 @@ loadMap() {
     
     let inputs = {
       "inTime":this.d,
-      "lat":this.latitude,
-      "lon":this.longitude,
+      "lat":this.lat,
+      "lon":this.lon,
       "empId":this.empId,
-      "lateInReason":this.myForm.value.reason
+      "lateInReason":this.myForm.value.lateInReason
     }
-    this.httpClient.post(this._checkinUrl,{inputs},{headers} )
+    this.httpClient.post(this._checkinUrl,inputs,{headers} )
       .subscribe(data => {
         console.log(data);
         this.checkinItems = data;
           this.storage.set(this.nextKey,JSON.stringify(this.checkinItems));
-          if(!this.items.error){
+          if(!this.checkinItems.error){
             this.alert();
           }else{
             this.alertError();
@@ -105,7 +105,7 @@ getData(){
 async alert(){
   const alert = await this.alertCtrl.create({
     header: 'successfull',
-    message: this.items.message,
+    message: "check-in successfully",
     buttons: [{
       text: 'Ok',
           handler: () => {
@@ -118,7 +118,7 @@ async alert(){
 async alertError(){
   const alert = await this.alertCtrl.create({
     header: 'Unseccessfull',
-    message: this.items.message,
+    message: this.checkinItems.message,
     buttons: [{
       text: 'Ok',
           handler: () => {

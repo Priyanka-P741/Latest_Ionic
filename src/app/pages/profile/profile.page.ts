@@ -21,7 +21,7 @@ export class ProfilePage implements OnInit {
     name: string;
     email: string;
     dob: string;
-    profile_pic: string;
+    image: string;
     address: string;
     manager: string;
     phone_no: Number;
@@ -59,7 +59,7 @@ getData(){
       this.email =this.items.data.email;
       this.dob =this.items.data.dob;
       this.designation =this.items.data.designation;
-      this.profile_pic =this.items.data.profile_pic;
+      this.image =this.items.data.profile_pic;
       this.address =this.items.data.address;
       this.manager =this.items.data.manager;
       this.phone_no =this.items.data.phone_no;

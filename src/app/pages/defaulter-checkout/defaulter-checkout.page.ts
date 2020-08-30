@@ -31,7 +31,7 @@ d: Date = new Date();
 
   constructor(private router: Router,private alertCtrl: AlertController,private formsBuilder : FormBuilder,public httpClient:HttpClient,public storage:Storage) { 
     this.myForm = formsBuilder.group({
-    'reason':['', Validators.compose([Validators.maxLength(50), Validators.minLength(20), Validators.required])],
+    'earlyOutReason':['', Validators.compose([Validators.maxLength(50), Validators.minLength(20), Validators.required])],
   }); 
 }
 onSubmit(){
@@ -52,14 +52,16 @@ onSubmit(){
       
       let inputs = {
         "outTime":this.d,
-        "empId":this.empId
+        "empId":this.empId,
+        "earlyOutReason":this.myForm.value.earlyOutReason
+
       }
       this.httpClient.put(this._checkoutUrl,inputs,{headers} )
         .subscribe(data => {
           console.log(data);
           this.checkinItems = data;
             this.storage.set(this.nextKey,JSON.stringify(this.checkinItems));
-            if(!this.items.error){
+            if(!this.checkinItems.error){
               this.router.navigate(['user-home'])
                }else{
                  this.alertError();
@@ -72,7 +74,7 @@ onSubmit(){
     this.storage.get(this.key).then((val)=>{
       if(val!=null && val!=undefined){
         this.items =JSON.parse(val);
-        //console.log(this.items.data.name);
+        console.log(this.items.data.empId);
         this.token =this.items.token;
         this.empId =this.items.data.empId;
       }
@@ -82,7 +84,7 @@ onSubmit(){
   async alert(){
     const alert = await this.alertCtrl.create({
       header: 'successfull',
-      message: this.items.message,
+      message: 'check out successfully',
       buttons: [{
         text: 'Ok',
             handler: () => {
@@ -96,7 +98,7 @@ onSubmit(){
   async alertError(){
     const alert = await this.alertCtrl.create({
       header: 'Unseccessfull',
-      message: this.items.message,
+      message: this.checkinItems.message,
       buttons: [{
         text: 'Ok',
             handler: () => {
