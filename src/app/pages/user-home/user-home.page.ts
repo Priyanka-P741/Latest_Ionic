@@ -15,7 +15,7 @@ declare var google;
 })
 export class UserHomePage implements OnInit {
 
-  deviceId= 'test123';
+  deviceId= this.device.uuid;
   
   disabledButton;
 
