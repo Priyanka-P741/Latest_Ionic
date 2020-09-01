@@ -17,10 +17,19 @@ ion-button{
 
 ion-item{
     --background: transparent;
-    color: blue;
+    // color: blue;
 }
 
 .avatar{
     margin: 0 auto;
- }
+    // width: 100px !important; 
+    // height : 60px !important;
+}
+
+ion-chip{
+    margin: 0 auto;
+
+    justify-content: center;
+    width: 100px;
+}
 

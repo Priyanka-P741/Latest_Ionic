@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button color="warning" defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">Log In</ion-title>
+    <ion-title>Log In</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,11 +13,11 @@
       <ion-item  lines="full">
       <ion-icon class="custom-icon" name="mail-sharp"></ion-icon>&nbsp;
       <ion-label position="inline">Employee ID</ion-label>
-      <ion-input autocomplete="off" formControlName="email" type="text"></ion-input>
+      <ion-input autocomplete="off" formControlName="empId" type="text"></ion-input>
     </ion-item>
       <div>
-        <ng-container *ngFor="let validation of validation_messages.email">
-          <div *ngIf="myForm.get('email').hasError(validation.type) && myForm.get('email').touched">
+        <ng-container *ngFor="let validation of validation_messages.empId">
+          <div *ngIf="myForm.get('empId').hasError(validation.type) && myForm.get('empId').touched">
             <p>**{{validation.message}}</p>
           </div>
         </ng-container>
@@ -33,12 +33,26 @@
           <div *ngIf="myForm.get('password').hasError(validation.type) && myForm.get('password').touched">
             <p>**{{validation.message}}</p>
           </div>
+          <br>
+          <ion-item>
+            <ion-icon name="desktop-sharp"></ion-icon>&nbsp;
+            <ion-label position="inline">
+                  Device Id</ion-label>
+            <ion-input autocomplete="off" type="text"  formControlName="device_id" ></ion-input>
+            </ion-item>
+            <div>
+              <ng-container *ngFor="let validation of validation_messages.device_id">
+                <div *ngIf="myForm.get('device_id').hasError(validation.type) && myForm.get('device_id').touched">
+                  <p>**{{validation.message}}</p>
+                </div>
+              </ng-container>
+            </div>
         </ng-container>
       </div>
 </div>
     <ion-row style="padding-top:30px;">      
       <ion-col>
-        <ion-button fill="outline" shape="round" [routerLink]="['/user-home']" [disabled]="!myForm.valid" type="submit" expand="block">Sign In</ion-button>
+        <ion-button fill="outline" shape="round" (click)="sendPostRequest()" [disabled]="!myForm.valid" type="submit" expand="block">Sign In</ion-button>
         <ion-button fill="outline" shape="round" color="warning" [routerLink]="['/forgotpassword']"  expand="block">Forgot Password?</ion-button>
         <ion-button fill="outline" shape="round" color="success" [routerLink]="['/register']" expand="block">Create Account?</ion-button>
       </ion-col>

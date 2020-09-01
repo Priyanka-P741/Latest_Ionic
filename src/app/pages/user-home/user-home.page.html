@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title slot="start">Welcome User</ion-title>
+    <ion-title>Welcome User</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -28,12 +28,14 @@
   </ion-grid>
 
   <div class="map-wrapper">
-    <div id="map_center">
+    <!-- <div id="map_center">
       <img src="assets/icon/location-marker.png" />
-    </div>
+    </div> -->
     <div #map id="map"></div>
   </div>
   <ion-button color="warning" expand="full" (click)="loadMap()">Find me</ion-button>
+  <!-- <ion-button color="warning" expand="full" (click)="addMarker()">Call Marker</ion-button> -->
+
 
   <ion-grid>
     <ion-row>

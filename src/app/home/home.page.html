@@ -11,11 +11,11 @@
     <ion-row>
       <ion-img src="../../assets/img/home-img.jpg"></ion-img>
         <ion-col align-self-center class="bottom_pos">
-        <ion-button fill="outline" shape="round" [routerLink]="['/register']" expand="block">Register</ion-button>
+        <ion-button fill="outline" shape="round" (click)="navigateToRegistration()" expand="block">Register</ion-button>
 
         <span class="already"><small>New User?</small></span>
 
-        <ion-button fill="outline" shape="round" [routerLink]="['/login']" expand="block">Sign In</ion-button>
+        <ion-button fill="outline" shape="round" (click)="navigateToLogin()" expand="block">Sign In</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

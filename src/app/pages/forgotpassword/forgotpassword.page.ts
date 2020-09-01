@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PasswordValidator } from './password.validator';
 import { AbstractControl } from '@angular/forms';
+import { HttpClient,HttpHeaders,HttpRequest} from '@angular/common/http';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -12,14 +14,18 @@ import { AbstractControl } from '@angular/forms';
 })
 export class ForgotpasswordPage implements OnInit {
 
+  items:any = {};
+  key:string ='items';
+  token:string;
+
   validation_messages = {
-    'email' : [
-     { type : 'required' , message: 'Name is required.' },
+    'empId' : [
+     { type : 'required' , message: 'EmpId is required.' },
     ],
-    'password' : [
+    'oldpassword' : [
       { type : 'required' , message: 'Password is required.' },
      ],
-     'newPassword' : [
+     'password' : [
       { type : 'required' , message: 'Password is required.' },
      ],
      'confirmPassword' : [
@@ -30,8 +36,9 @@ export class ForgotpasswordPage implements OnInit {
 myForm: FormGroup;
 passwordType: string ="password";
 passwordShown: boolean = false;
+_updatePasswordUrl ="https://emp-manage90.herokuapp.com/api/password-update"
 
-  constructor(public alertController: AlertController, private router: Router, private formsBuilder : FormBuilder) { }
+  constructor(public alertController: AlertController,public storage:Storage,public httpClient:HttpClient, private router: Router, private formsBuilder : FormBuilder) { }
 
   onSubmit() {
     console.log(this.myForm.value);
@@ -48,7 +55,64 @@ public togglePassword(){
   }
 }
 
-async btnClick() {
+
+
+  ngOnInit() {
+    this.myForm = this.formsBuilder.group({
+      empId:['', [Validators.required]],
+      oldpassword:['', [Validators.required]],
+      password:['',[Validators.required]],
+      confirmPassword:['',[Validators.required]]
+
+    },{ validators: this.Password.bind(this) });
+
+    this.getData();
+  }
+  Password(formGroup:FormGroup) {
+    const { value:password } = formGroup.get('password');
+    const { value:confirmPassword } = formGroup.get('confirmPassword');
+    return password === confirmPassword ? null : {passwordNotMatch:true};
+
+  }
+
+  sendPutRequest() {
+    
+    
+    
+    const headers = new HttpHeaders()
+    .append('Content-Type', 'application/json')
+    .append('Authorization',	this.token)
+    .append('Access-Control-Allow-Headers', '*')
+    .append('Access-Control-Allow-Methods', "GET, POST, DELETE, PUT")
+    .append('Access-Control-Allow-Origin', '*');
+
+    this.httpClient.put(this._updatePasswordUrl,JSON.stringify(this.myForm.value),{headers} )
+      .subscribe(data => {
+        console.log(data);
+        this.items = data;
+          this.storage.set(this.key,JSON.stringify(this.items));
+          if(!this.items.error){
+            this.alert();
+          }else{
+            this.alertError();
+          }        
+       }, error => {
+        console.log(error);
+      });
+}
+
+getData(){
+  this.storage.get(this.key).then((val)=>{
+    if(val!=null && val!=undefined){
+      this.items =JSON.parse(val);
+      //console.log(this.items.token);
+      this.token =this.items.token;
+      
+    }
+  })
+}
+
+async alert(){
   const alert = await this.alertController.create({
     header: 'Update Password',
     message: 'Successfully changed password.',
@@ -61,24 +125,21 @@ async btnClick() {
   });
   await alert.present();
 }
-// required pattern="^\d{10}$"
 
+async alertError(){
+  const alert = await this.alertController.create({
+    header: 'Unsuccessfull',
+    message: this.items.message,
+    buttons: [{
+      text: 'Ok',
+          handler: () => {
+            this.router.navigate(['forgotpassword']);
+          }
+    }]
+  });
+  await alert.present();
+}
 
-  ngOnInit() {
-    this.myForm = this.formsBuilder.group({
-      email:['', [Validators.required]],
-      password:['', [Validators.required]],
-      newPassword:['',[Validators.required]],
-      confirmPassword:['',[Validators.required]]
-
-    },{ validators: this.Password.bind(this) });
-  }
-  Password(formGroup:FormGroup) {
-    const { value:newPassword } = formGroup.get('newPassword');
-    const { value:confirmPassword } = formGroup.get('confirmPassword');
-    return newPassword === confirmPassword ? null : {passwordNotMatch:true};
-
-  }
   }
 
 

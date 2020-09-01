@@ -1,50 +1,62 @@
 <ion-header translucent no-border>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button color="warning"></ion-back-button>
+      <ion-back-button defaultHref="user-home"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">
-      Edit Profile&nbsp;</ion-title>
+    <ion-title>Edit Profile&nbsp;</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
   <div class="ion-padding">
-
     <ion-item>
-      <ion-label position="inline">Name :</ion-label>
-      <ion-input formControlName="name" type="text"></ion-input>
+      <ion-label position="inline">Emp Id :</ion-label>
+      <ion-input [(ngModel)]="empId" formControlName="empId" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Designation :</ion-label>
-      <ion-input formControlName="designation" type="text"></ion-input>
+      <ion-label position="inline">Name : </ion-label>
+      <ion-input [(ngModel)]="name" formControlName="name" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Designation : </ion-label>
+      <ion-input [(ngModel)]="designation" formControlName="designation" type="text"></ion-input>
     </ion-item>
       <ion-item>
-        <ion-label position="inline">Reporting Manager :</ion-label>
-      <ion-input formControlName="reportingmanager" type="text"></ion-input>
+        <ion-label position="inline">Reporting Manager : </ion-label>
+      <ion-input [(ngModel)]="manager" formControlName="manager" type="text"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="inline">Hardware Allotted :</ion-label>
-      <ion-input formControlName="hardwarealloted" type="text"></ion-input>
+        <ion-label position="inline">Hardware Allotted : </ion-label>
+      <ion-input [(ngModel)]="hardware" formControlName="hardware" type="text"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="inline">Personal Email :</ion-label>
-        <ion-input formControlName="email" type="email"></ion-input>
+        <ion-label position="inline">Date Of Birth : </ion-label>
+        <ion-input [(ngModel)]="dob" formControlName="dob" type="date"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="inline">Personal Email : </ion-label>
+        <ion-input [(ngModel)]="email" formControlName="email" type="email"></ion-input>
     </ion-item>
     <ion-item lines="full"> 
-      <ion-label position="inline">Profile Picture</ion-label>
-      <ion-input formControlName="pic" type="file" accept="image/*"></ion-input>
+      <ion-label position="inline">Profile Picture :</ion-label>
+      <ion-input [(ngModel)]="image" (change)="onFileSelected($event)" formControlName="image" type="file" accept="image/*"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Address :</ion-label>
-      <ion-input formControlName="addr" type="text"></ion-input>
+      <ion-label position="inline">Address : </ion-label>
+      <ion-input [(ngModel)]="address" formControlName="addr" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Mobile Number :</ion-label>
-      <ion-input formControlName="mobile" type="number"></ion-input>
+      <ion-label position="inline">Mobile Number : </ion-label>
+      <ion-input [(ngModel)]="phone_no" formControlName="phone_no" type="number"></ion-input>
     </ion-item>
 </div>
-<ion-button fill="outline" shape="round" type="submit" expand="block" (click)="btnClicked()">Save</ion-button>
+<ion-button fill="outline" shape="round" type="submit" expand="block" (click)="sendPutRequest()">Save</ion-button>
 </form>
 </ion-content>
+
+
+
+
+
+

@@ -1,7 +1,7 @@
 <ion-header translucent no-border>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button color="warning"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-center">
     <ion-icon name="happy-outline"></ion-icon>
@@ -18,47 +18,63 @@
 <ion-content fullscreen="true" slot="fixed"  [scrollEvents]="true">
 
   <ion-avatar class="avatar">
-    <img src="../../assets/img/EmpProfilePic.png" alt="">
+    <img src="{{image}}" alt="../../assets/img/EmpProfilePic.png">
     <ion-chip>
-      <ion-label color="danger">ID</ion-label>
+      <ion-label color="danger">ID:{{empId}}</ion-label>
     </ion-chip>
   </ion-avatar>
+  
 <br>
 <div class="ion-padding">
 
   <ion-item>
     <ion-label>
-      Name
+      Name : {{name}}
     </ion-label>
   </ion-item>
   <ion-item>
       <ion-label>
-        Designation
+        Personal Email : {{email}}
       </ion-label>
   </ion-item>
     <ion-item>
       <ion-label>
-        Reporting Manager
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        Hardware Allotted
+        Designation : {{designation}}
       </ion-label>
     </ion-item>
     <ion-item>
+      <ion-label>
+        Date of Birth : {{dob}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
     <ion-label>
-      Personal Email
+      Reporting Manager : {{manager}}
     </ion-label>
   </ion-item>
   <ion-item>
     <ion-label>
-      Address
+      Joining Date :{{joining_date}}
     </ion-label>
   </ion-item>
   <ion-item>
     <ion-label>
-      Mobile number
+      Hardware Allotted : {{hardware}}
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Address : {{address}}
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Mobile number : {{phone_no}}
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      Device Id : {{device_id}}
     </ion-label>
   </ion-item>
   </div>

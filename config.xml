@@ -3,7 +3,7 @@
     <name>MyApp</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://localhost:8103" />
+    <content original-src="index.html" src="http://localhost:8102" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -100,11 +100,10 @@
     <plugin name="cordova-plugin-nativegeocoder" spec="^3.4.1" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.2" />
     <allow-navigation href="http://localhost:8101" sessionid="3c971667" />
+    <plugin name="cordova-plugin-device" spec="^2.0.3" />
     <allow-navigation href="http://localhost:8102" sessionid="b7c00e8f" />
     <allow-navigation href="http://localhost:8104" sessionid="8074b298" />
     <allow-navigation href="http://localhost:8100" sessionid="14bcc5ca" />
-    <plugin name="cordova-plugin-device" spec="^2.0.3" />
-    <allow-navigation href="http://localhost:8103" sessionid="717565e8" />
     <engine name="browser" spec="6.0.0" />
-    <engine name="android" spec="^7.0.0" />
+    <allow-navigation href="http://localhost:8103" sessionid="4e77a318" />
 </widget>
