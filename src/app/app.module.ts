@@ -19,6 +19,7 @@ import { ProfileEditService } from './services/profile-edit.service';
 // import { AngularFirestoreModule } from 'angularfire2/firestore';
 // import { FcmService } from './services/fcm.service'
 import { Device } from '@ionic-native/device/ngx';
+import { ParallaxDirective } from './parallax.directive';
 // import { Push } from '@ionic-native/push/ngx';
 
 //  const config = {
@@ -26,7 +27,7 @@ import { Device } from '@ionic-native/device/ngx';
 //  }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ParallaxDirective],
   entryComponents: [],
   imports: [BrowserModule,
     FormsModule,

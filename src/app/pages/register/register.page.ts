@@ -90,80 +90,8 @@ export class RegisterPage implements OnInit {
       
   } 
 
-  
-       
-   
-//// Extra Code By Ashish
    
 
-// onUploadproduct(producttitle:string,
-//   prodImages:File,
-//   desc:string,
-//   price:string){
-//    var formdata :any= new FormData();
-//    formdata.append('producttitle',producttitle),
-//    formdata.append('prodImage',prodImages),
-//    formdata.append('desc',desc),
-//    formdata.append('price',price)
-//   //  console.log('data to send: ',prodImages);
-//      return  this.http.post(this._url,formdata,{
-//     reportProgress:true,
-//     observe:'events'
-//   }).pipe(
-//     catchError(this.errorMgmt)
-//   )
-//  }
-//  errorMgmt(error: HttpErrorResponse) {
-//   let errorMessage = '';
-//   if (error.error instanceof ErrorEvent) {
-//     // Get client-side error
-//     errorMessage = error.error.message;
-//   } else {
-//     // Get server-side error
-//     errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-//   }
-//   console.log(errorMessage);
-//   return throwError(errorMessage);
-// }
-// }
-
-
-
-// onSubmitAddProductform(){
-//   // console.log(this.AddProduct.value);
-//   this.addProductService.onUploadproduct(
-//   this.AddProduct.value.producttitle,
-//   this.AddProduct.value.prodImage,
-//   this.AddProduct.value.desc,
-//   this.AddProduct.value.price,
-//   ).subscribe((event: HttpEvent<any>) => {
-//     switch (event.type) {
-//       case HttpEventType.Sent:
-//         console.log('Request has been made!');
-//         break;
-//       case HttpEventType.ResponseHeader:
-//         console.log('Response header has been received!');
-//         break;
-//       case HttpEventType.UploadProgress:
-//         this.progress = Math.round(event.loaded / event.total * 100);
-//         console.log(`Uploaded! ${this.progress}%`);
-//         break;
-//       case HttpEventType.Response:
-//         console.log('User successfully created!', event.body);
-//         setTimeout(() => {
-//           this.progress = 0;
-//         }, 1500);
-
-//     }
-//   this.AddProduct.reset();
-
-//   })
-  
-
-// }
-
-
-//End
 sendPostRequest() {
 
 this.registrationService.onUploadproduct(
@@ -196,7 +124,7 @@ async alert(){
     buttons: [{
       text: 'Ok',
           handler: () => {
-            this.router.navigate(['/user-home']);
+            this.router.navigate(['/login']);
           }
     }]
   });
